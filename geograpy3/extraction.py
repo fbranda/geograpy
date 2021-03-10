@@ -19,7 +19,7 @@ class Extractor(object):
             a = Article(self.url)
             a.download()
             a.parse()
-            self.text = a.text.lower()
+            self.text = a.text
 
 
     def find_entities(self):
