@@ -59,7 +59,7 @@ class PlaceContext(object):
         with open(cur_dir + "/data/GeoLite2-City-Locations.csv", "r", encoding = 'utf8') as info:
             reader = csv.reader(info)
             for row in reader:
-                cur.execute("INSERT INTO cities VALUES(?, ?, ?, ?, ?, ?, ?, ?, LOWER(?), ?);", row)
+                cur.execute("INSERT INTO cities VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", row)
 
             self.conn.commit()
 
@@ -169,7 +169,7 @@ class PlaceContext(object):
 
         cur = self.conn.cursor()
         table_query = "SELECT * FROM cities WHERE city_name IN (" + \
-                      ",".join("?" * len(self.places)) + ")"
+                      ",".join("LOWER(?)" * len(self.places)) + ")"
         cur.execute(table_query, self.places)
         rows = cur.fetchall()
 
