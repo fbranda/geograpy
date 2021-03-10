@@ -59,8 +59,8 @@ class PlaceContext(object):
         with open(cur_dir + "/data/GeoLite2-City-Locations.csv", "r", encoding = 'utf8') as info:
             reader = csv.reader(info)
             for row in reader:
-                row = row.lower()
-                cur.execute("INSERT INTO cities VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", row)
+                
+                cur.execute("INSERT INTO cities VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", row.lower())
 
             self.conn.commit()
 
