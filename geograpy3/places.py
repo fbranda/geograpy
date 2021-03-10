@@ -168,7 +168,8 @@ class PlaceContext(object):
             self.set_regions()
 
         cur = self.conn.cursor()
-        table_query = "SELECT city_name FROM cities"
+        table_query = "SELECT * FROM cities WHERE city_name IN (" + \
+                      ",".join("?" * len(self.places)) + ")"
         cur.execute(table_query, self.places)
         rows = cur.fetchall()
 
