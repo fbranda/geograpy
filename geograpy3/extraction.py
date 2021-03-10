@@ -19,6 +19,7 @@ class Extractor(object):
             a = Article(self.url)
             a.download()
             a.parse()
+            a.lower()
             self.text = a.text
 
 
