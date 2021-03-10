@@ -3,7 +3,7 @@ import inspect
 import csv
 import sqlite3
 from collections import Counter
-from custom_dict import InsensitiveDictReader
+from geograpy3.custom_dict import InsensitiveDictReader
 
 import jellyfish
 import pycountry
