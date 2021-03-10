@@ -3,7 +3,6 @@ import inspect
 import csv
 import sqlite3
 from collections import Counter
-from geograpy3.custom_dict import InsensitiveDictReader
 
 import jellyfish
 import pycountry
@@ -56,7 +55,7 @@ class PlaceContext(object):
              time_zone TEXT)'''
         cur.execute(table_creation)
         cur_dir = os.path.dirname(os.path.realpath(inspect.stack()[0][1]))
-        with open(cur_dir + "/data/GeoLite2-City-Locations.csv", "r") as info:
+        with open(cur_dir + "/data/GeoLite2-City-Locations.csv", "r", encoding = 'utf8') as info:
             reader = csv.reader(info)
             for row in reader:
                 cur.execute("INSERT INTO cities VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", row)
@@ -81,7 +80,7 @@ class PlaceContext(object):
         """Method used to correct country mispellings."""
         cur_dir = os.path.dirname(os.path.realpath(inspect.stack()[0][1]))
         with open(cur_dir + "/data/ISO3166ErrorDictionary.csv", "r", encoding = 'utf8') as info:
-            reader = csv.reader(info)
+            reader = InsensitiveDictReader(info)
             for row in reader:
                 if s in remove_non_ascii(row[0]):
                     return row[2]
