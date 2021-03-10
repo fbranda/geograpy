@@ -182,7 +182,7 @@ class PlaceContext(object):
             except KeyError:
                 country_name = row[4]
 
-            city_name = row[7].lower()
+            city_name = row[7]
             region_name = row[6]
 
             if city_name not in self.cities:
