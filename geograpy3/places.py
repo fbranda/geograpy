@@ -169,7 +169,7 @@ class PlaceContext(object):
 
         cur = self.conn.cursor()
         table_query = "SELECT * FROM cities WHERE city_name IN (" + \
-                      ",".join("LOWER(?)" * len(self.places)) + ")"
+                      ",".join("?" * len(self.places)) + ")"
         cur.execute(table_query, self.places)
         rows = cur.fetchall()
 
