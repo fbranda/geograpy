@@ -98,7 +98,7 @@ class PlaceContext(object):
 
     def places_by_name(self, place_name, column_name):
         cur = self.conn.cursor()
-        cur.execute('SELECT * FROM cities WHERE ' + column_name + ' = "' + place_name + '"')
+        cur.execute('SELECT * FROM cities WHERE ' + column_name + ' = "' + LOWER(place_name) + '"')
         rows = cur.fetchall()
 
         if len(rows) > 0:
